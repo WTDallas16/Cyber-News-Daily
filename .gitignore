@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Runtime state and logs
+.state/
+daily_cyber_brief_state.json
+*.log
