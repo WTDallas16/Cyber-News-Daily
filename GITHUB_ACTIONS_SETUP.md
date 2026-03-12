@@ -13,10 +13,20 @@
    - `SMTP_STARTTLS`
    - `SLACK_WEBHOOK_URL` (optional)
 4. Review `.github/workflows/daily_cyber_brief.yml` and adjust the cron line if you want a different schedule.
-   - `0 14 * * *` means **14:00 UTC** every day.
+   - `0 13 * * *` means **13:00 UTC** every day.
    - GitHub Actions cron uses **UTC**, not your laptop's local timezone.
+   - The workflow is pinned to current action majors and forces JavaScript actions onto **Node.js 24** to avoid the GitHub Actions Node 20 deprecation path.
 5. Commit and push.
 6. In the **Actions** tab, run the workflow once with **Run workflow** to test it.
+
+## If the workflow still fails
+
+The Node.js deprecation notice is only a warning. If the job still exits with code `1`, open the `Run daily cyber brief` step and look for the Python traceback.
+
+Common causes:
+- One or more required secrets are missing or misspelled: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`, `EMAIL_FROM`, `EMAIL_TO`
+- `SMTP_STARTTLS` / `SMTP_USE_SSL` are set incorrectly for your mail provider
+- Your SMTP provider rejects the login from GitHub Actions
 
 ## Important credential cleanup
 
